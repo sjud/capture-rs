@@ -1,0 +1,20 @@
+[package]
+name = "client_capture"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+wasm-bindgen = "0.2"
+web-sys = { version = "0.3.70", features = ["Window", "Performance", "DomException","Location", "DomImplementation", "HtmlElement","HtmlIFrameElement","GetRootNodeOptions","NamedNodeMap","Attr","SvgElement","Text","DocumentType","EventTarget", "MouseEvent","console","Element","Document","MutationObserver","MutationRecord","MutationObserverInit","NodeList","Node"] }
+js-sys = "0.3"
+gloo-timers = { version = "0.3", features=["futures"]}
+gloo-net = "0.6.0"
+wasm-bindgen-futures = "0.4.43"
+tokio = {version = "1.40.0", default-features = false, features=["sync"]}
+serde = {version ="1.0.209", features=["serde_derive"]}
+wasm-streams = "0.4.0"
+bincode.workspace = true
+influxdb = { version = "0.7.2", features = ["derive"] , optional = true}
+
+[features]
+influxdb = ["dep:influxdb"]

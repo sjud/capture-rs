@@ -1,0 +1,12 @@
+
+[workspace]
+resolver = "2"
+members = [
+    "client_capture",
+    "examples/leptos-test",
+    "replay-server",
+]
+
+[workspace.dependencies]
+client_capture = {path = "./client_capture"}
+bincode = "1.3.3"
