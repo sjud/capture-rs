@@ -2,11 +2,6 @@ name: Cargo Leptos and Playwright Tests
 
 on:
   push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
 
 jobs:
   build-and-test:
@@ -44,7 +39,7 @@ jobs:
         run: ./leptos-test &
 
       - name: Run playwright tests
-        workding-directory: examples/leptos-test/end2end
+        working-directory: examples/leptos-test/end2end
         run: npx playwright test
 
       - name: Upload Playwright Report
