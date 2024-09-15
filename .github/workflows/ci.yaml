@@ -12,49 +12,49 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
     steps:
-      # Step 1: Checkout the repository
       - uses: actions/checkout@v3
 
-      # Step 2: Install Rust and cargo-leptos
       - name: Install Rust
         uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
           components: rustfmt
+
       - name: Install cargo-leptos
         run: |
           cargo install cargo-leptos
           rustup target add wasm32-unknown-unknown  
-      
-      # Step 3: Build and serve with cargo-leptos in the specific directory
-      - name: Run Cargo Leptos Serve
-        run: |
-          cd examples/leptos-test
-          cargo leptos serve
-        shell: bash
 
-      # Step 4: Wait for the server to start (adjust sleep as necessary)
-      - name: Wait for Leptos server
-        run: sleep 10
-
-      # Step 5: Setup Node.js
-      - uses: actions/setup-node@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
           node-version: 18
 
-      # Step 6: Install Node.js dependencies for Playwright
       - name: Install npm dependencies
+        working-directory: examples/leptos-test/end2end
         run: npm ci
 
-      # Step 7: Run Playwright tests in a specific directory
+      - name: Install Playwright Browsers
+        working-directory: examples/leptos-test/end2end
+        run: npx playwright install
+
       - name: Run Playwright Tests
         run: |
-          cd examples/leptos-test/end2end
+          cd examples/leptos-test
+          nohup bash -c "exec -a leptos_server cargo leptos serve" &>/dev/null &
+          SERVER_PID=$!
+          while ! nc -z localhost 3000; do
+            sleep 1
+          done
+          cd end2end
           npx playwright test
+          EXIT_CODE=$?
+          kill -- -$SERVER_PID
+          exit $EXIT_CODE
 
-      # Optionally, upload test artifacts (like reports)
-      - uses: actions/upload-artifact@v4
+      - name: Upload Playwright Report
         if: ${{ always() }}
+        uses: actions/upload-artifact@v4
         with:
           name: playwright-report
           path: examples/leptos-test/end2end/test-results/.last-run.json
