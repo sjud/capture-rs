@@ -15,8 +15,9 @@ jobs:
           toolchain: stable
 
       - name: Install cargo-leptos
+        uses: cargo-bins/cargo-binstall@main
         run: |
-          cargo install cargo-leptos
+          cargo binstall cargo-leptos
           rustup target add wasm32-unknown-unknown  
 
       - name: Setup Node.js
