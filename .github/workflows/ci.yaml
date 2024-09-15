@@ -22,8 +22,10 @@ jobs:
           toolchain: stable
           components: rustfmt
       - name: Install cargo-leptos
-        run: cargo install cargo-leptos
-
+        run: |
+          cargo install cargo-leptos
+          rustup target add wasm32-unknown-unknown  
+      
       # Step 3: Build and serve with cargo-leptos in the specific directory
       - name: Run Cargo Leptos Serve
         run: |
