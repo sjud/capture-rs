@@ -1,5 +1,5 @@
 name: Cargo Leptos and Playwright Tests
-#
+
 on:
   push:
 
