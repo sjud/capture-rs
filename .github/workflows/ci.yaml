@@ -14,8 +14,10 @@ jobs:
         with:
           toolchain: stable
 
-      - name: Install cargo-leptos
+      - name: Use binstall
         uses: cargo-bins/cargo-binstall@main
+
+      - name: Install cargo-leptos
         run: |
           cargo binstall cargo-leptos
           rustup target add wasm32-unknown-unknown  
