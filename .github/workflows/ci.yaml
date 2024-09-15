@@ -23,15 +23,26 @@ jobs:
           rustup target add wasm32-unknown-unknown  
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
-
+          node-version: 20
+          cache: 'npm'
+      
       - name: Install npm dependencies and playwright
         working-directory: examples/leptos-test/end2end
         run: |
           npm ci
           npx playwright install --with-deps
+      
+      - uses: actions/cache@v4
+        with:
+        path: |
+          ~/.cargo/bin/
+          ~/.cargo/registry/index/
+          ~/.cargo/registry/cache/
+          ~/.cargo/git/db/
+          target/
+        key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
       
       - name: Build example
         working-directory: examples/leptos-test
