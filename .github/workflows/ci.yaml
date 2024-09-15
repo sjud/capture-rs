@@ -18,7 +18,6 @@ jobs:
         uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
-          components: rustfmt
 
       - name: Install cargo-leptos
         run: |
@@ -30,25 +29,26 @@ jobs:
         with:
           node-version: 18
 
-      - name: Install npm dependencies
+      - name: Install npm dependencies and playwright
         working-directory: examples/leptos-test/end2end
-        run: npm ci
-
-      - name: Install Playwright Browsers
-        working-directory: examples/leptos-test/end2end
-        run: npx playwright install --with-deps
-      
-      - name: Run Playwright Tests
-        working-directory: examples/leptos-test
         run: |
-          cargo leptos build --release
-          ./../../target/release/leptos-test &
-          cd end2end
-          npx playwright test
+          npm ci
+          npx playwright install --with-deps
+      
+      - name: Build example
+        working-directory: examples/leptos-test
+        run: cargo leptos build --release
+      
+      - name: Run server in background
+        working-directory: target/release
+        run: ./leptos-test &
+
+      - name: Run playwright tests
+        workding-directory: examples/leptos-test/end2end
+        run: npx playwright test
 
       - name: Upload Playwright Report
-        if: ${{ always() }}
         uses: actions/upload-artifact@v4
         with:
           name: playwright-report
-          path: examples/leptos-test/end2end/test-results/.last-run.json
+          path: examples/leptos-test/end2end/test-results/last-run.json
