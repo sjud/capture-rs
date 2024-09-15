@@ -39,18 +39,11 @@ jobs:
         run: npx playwright install
 
       - name: Run Playwright Tests
+        working-directory: examples/leptos-test
         run: |
-          cd examples/leptos-test
-          nohup bash -c "exec -a leptos_server cargo leptos serve" &>/dev/null &
-          SERVER_PID=$!
-          while ! nc -z localhost 3000; do
-            sleep 1
-          done
+          cargo leptos end-to-end
           cd end2end
           npx playwright test
-          EXIT_CODE=$?
-          kill -- -$SERVER_PID
-          exit $EXIT_CODE
 
       - name: Upload Playwright Report
         if: ${{ always() }}
