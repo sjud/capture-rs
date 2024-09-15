@@ -27,7 +27,8 @@ jobs:
         with:
           node-version: 20
           cache: 'npm'
-      
+        working-directory: examples/leptos-test/end2end
+        
       - name: Install npm dependencies and playwright
         working-directory: examples/leptos-test/end2end
         run: |
