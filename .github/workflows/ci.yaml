@@ -41,7 +41,8 @@ jobs:
       - name: Run Playwright Tests
         working-directory: examples/leptos-test
         run: |
-          cargo leptos end-to-end
+          cargo leptos build
+          ./../../target/debug/leptos-test &
           cd end2end
           npx playwright test
 
