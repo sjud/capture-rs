@@ -36,8 +36,7 @@ jobs:
 
       - name: Install Playwright Browsers
         working-directory: examples/leptos-test/end2end
-        run: | 
-        npx playwright install --with-deps
+        run: npx playwright install --with-deps
       
       - name: Run Playwright Tests
         working-directory: examples/leptos-test
