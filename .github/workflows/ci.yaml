@@ -30,8 +30,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm-${{ matrix.example_name }}
-          path: examples/${{ matrix.example_name }}/end2end/package-lock.json
+          cache: 'npm'
+          cache-dependency-path:  examples/${{ matrix.example_name }}/end2end/package-lock.json
 
       - name: Cache Playwright browsers
         uses: actions/cache@v4
