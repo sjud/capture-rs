@@ -75,4 +75,4 @@ jobs:
         if: always()
         with:
           name: playwright-report
-          path: examples/${{ matrix.example_name }}/end2end/test-results/last-run.json
+          path: examples/${{ matrix.example_name }}/end2end/test-results/.last-run.json

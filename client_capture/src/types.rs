@@ -1,4 +1,4 @@
-use crate::{timestamp, window, SNAPSHOT_TIME, TIME_OF_LAST_MUTATION};
+use crate::{timestamp, window, TIME_OF_LAST_MUTATION};
 use js_sys::Array;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;

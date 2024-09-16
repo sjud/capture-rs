@@ -1,4 +1,4 @@
-use std::{borrow::Borrow, collections::HashMap};
+use std::collections::HashMap;
 
 use js_sys::{Array, Function};
 use tokio::sync::mpsc::UnboundedSender;

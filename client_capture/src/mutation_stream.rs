@@ -1,7 +1,7 @@
 use tokio::sync::mpsc::{unbounded_channel, UnboundedReceiver, UnboundedSender};
 use wasm_bindgen_futures::spawn_local;
 
-use crate::{timestamp, utils::log, MutationVariant};
+use crate::{timestamp, MutationVariant};
 
 pub struct MutationStream<S: AsRef<str>> {
     pub sender: UnboundedSender<MutationVariant>,

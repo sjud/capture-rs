@@ -1,4 +1,3 @@
-use crate::utils::log;
 use crate::{types::*, SERIALIZED_NODE_MAP_REPLAY};
 use crate::{window, NODE_MAP_REPLAY};
 use std::collections::HashMap;
