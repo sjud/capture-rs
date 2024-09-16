@@ -1,5 +1,5 @@
 name: Cargo Leptos and Playwright Tests
-
+#
 on:
   push:
 
@@ -28,7 +28,7 @@ jobs:
           node-version: 20
       
       - name: Cache npm cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('examples/leptos-test/end2end/package-lock.json') }}
