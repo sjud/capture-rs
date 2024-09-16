@@ -990,6 +990,25 @@ dependencies = [
 ]
 
 [[package]]
+name = "leptos-test2"
+version = "0.1.0"
+dependencies = [
+ "axum",
+ "console_error_panic_hook",
+ "http 1.1.0",
+ "leptos",
+ "leptos_axum",
+ "leptos_meta",
+ "leptos_router",
+ "thiserror",
+ "tokio",
+ "tower",
+ "tower-http",
+ "tracing",
+ "wasm-bindgen",
+]
+
+[[package]]
 name = "leptos_axum"
 version = "0.7.0-beta4"
 source = "registry+https://github.com/rust-lang/crates.io-index"

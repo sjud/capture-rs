@@ -4,6 +4,7 @@ resolver = "2"
 members = [
     "client_capture",
     "examples/leptos-test",
+    "examples/leptos-test2",
     "replay-server",
 ]
 
